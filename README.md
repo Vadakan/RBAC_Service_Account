@@ -69,5 +69,79 @@
 ![image](https://user-images.githubusercontent.com/80065996/164911857-cc86c57f-0dfd-4037-afc0-10adc4cf6629.png)
 
 
+# Demo of service account concepts:
+
+# get the service account available currently in the namsepace
+
+
+![image](https://user-images.githubusercontent.com/80065996/164915149-efd03ca9-e4d5-409c-a8eb-af413b8e1e52.png)
+
+
+# create the new 'service account' named 'aspa1' in the 'msundarmunichamy-dev' namespace.
+# describe the 'service account' 'aspa1' created using 'kubectl describe' command 
+
+
+![image](https://user-images.githubusercontent.com/80065996/164915827-f7cdb3e0-97ae-4a2b-8ba5-dab4188a2f8f.png)
+
+
+# if we create 'service account', many 'secrets' will be created by default with the prefix name of 'service accounts'
+# trying to get the details of one of the 'secret' created called 'mountable secret' as highlughted below.
+
+
+![image](https://user-images.githubusercontent.com/80065996/164915925-71c3489c-4a10-44e9-bc4b-bdd030418eb1.png)
+
+
+# try to get the yaml details of the 'secrets' created 
+
+
+![image](https://user-images.githubusercontent.com/80065996/164916065-edf1e18a-acd1-4576-8078-18a55a061d99.png)
+
+
+# Look for the 3 main things in the yaml. (meaning 3 important fields)
+
+# 1) ca.crt
+# 2) namespace
+# 3) token
+
+# depending on the type of secret, some more fields will also be there. ( you can see one secret created for 'image pull' and  some other secrets for 'tokens' and some other secrets for 'mountable secrets'
+
+
+![image](https://user-images.githubusercontent.com/80065996/164916273-ee677f01-d777-41ce-98f2-9158a779aa91.png)
+
+
+![image](https://user-images.githubusercontent.com/80065996/164916289-f25a4f70-eb2c-41b7-a3f0-61319a2d4605.png)
+
+
+![image](https://user-images.githubusercontent.com/80065996/164916303-f6b46dec-22e8-482a-b96d-c4fb82234b0e.png)
+
+
+# we can take the 'namespace' details and decode it like below to see actual content of it
+
+
+![image](https://user-images.githubusercontent.com/80065996/164916504-c00a7edd-ad61-40b8-8637-76178dc31919.png)
+
+
+# Take the ca.crt content from the 'secret's' yaml file
+
+
+![image](https://user-images.githubusercontent.com/80065996/164924715-c8b9337d-0c92-4cc8-b4bb-b2ecc9245cd6.png)
+
+
+# we are going to check the same ca.crt is present in 'kube-api' server. because if service account needs to get authenticated, request has to be made to the 'kube-api-server' which runs on the kuberneted master. so we are going to check that
+
+# taking the pod details of 'kube-api-server'
+
+
+![image](https://user-images.githubusercontent.com/80065996/164921726-452b0ed9-e825-4ed9-9be4-49cb2f148cbc.png)
+
+
+![image](https://user-images.githubusercontent.com/80065996/164928533-e35af321-b935-4c9b-b4a6-854130f98bf7.png)
+
+# edit the pod using 'kubectl edit' and identify the location of 'cert file' present
+
+
+![image](https://user-images.githubusercontent.com/80065996/164929560-ce3e1284-fbb9-4718-83ec-7949a7d24da1.png)
+
+
 
 
